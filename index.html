@@ -123,24 +123,37 @@
 		canvas.width = $(window).width();
 		canvas.height = $(window).height();
 		var context = canvas.getContext('2d');
-
-		nameInput.keydown(function(e){
+		
+		var hash = window.location.hash.substring(1);
+		
+		if (hash !== ""|hash!==undefined){
+			name = hash;
+			goForIt();
+		}
+		else {
+			nameInput.keydown(function(e){
+				name = nameInput.val();
+				window.location.hash = "#"+name;
+				if(e.which == 13) {
+					goForIt();
+				}
+			});
+		}
+		
+		function goForIt(){
 			$("#tip").fadeIn(300);
 
-			if(e.which == 13) {
-				name = nameInput.val();
-				nameForm.fadeOut(500);
+			nameForm.fadeOut(500);
 
-				setInterval(function() {
-					context.font="30px Verdana";
-					context.fillStyle = "#fff";
-					context.fillText("?", Math.random()*$(window).width(), Math.random()*$(window).height());
-					utterance = new SpeechSynthesisUtterance((Math.random() > 0.8 ? "Seriously, w" : "W") + "hat the fuck " + (name ? name : "mate") + "?");
-					speechSynthesis.speak(utterance);
+			setInterval(function() {
+				context.font="30px Verdana";
+				context.fillStyle = "#fff";
+				context.fillText("?", Math.random()*$(window).width(), Math.random()*$(window).height());
+				utterance = new SpeechSynthesisUtterance((Math.random() > 0.8 ? "Seriously, w" : "W") + "hat the fuck " + (name ? name : "mate") + "?");
+				speechSynthesis.speak(utterance);
 
-				}, 3000);
-			}
-		})
+			}, 3000);
+		}
 	</script>
 </body>
 </html>
