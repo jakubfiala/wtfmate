@@ -1,0 +1,146 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>wtfmate</title>
+	<meta charset="UTF-8">
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+	<style type="text/css">
+		html, body, div, span, applet, object, iframe,
+		h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+		a, abbr, acronym, address, big, cite, code,
+		del, dfn, em, font, img, ins, kbd, q, s, samp,
+		small, strike, strong, sub, sup, tt, var,
+		dl, dt, dd, ol, ul, li,
+		fieldset, form, label, legend,
+		table, caption, tbody, tfoot, thead, tr, th, td {
+		    margin: 0;
+		    padding: 0;
+		    border: 0;
+		    outline: 0;
+		    vertical-align: baseline;
+		    -webkit-font-smoothing: antialiased;
+		    -webkit-text-shadow: rgba(0,0,0,.01) 0 0 1px;
+		}
+
+		body {
+			background-color: black;
+			color: white;
+			font-size: 20vh;
+			text-align: center;
+			font-family: 'Open Sans', sans-serif;
+			font-weight: bold;
+		}
+
+
+		input[type="text"] {
+			margin-top: 10vh;
+			background: black;
+			color: white;
+			border: none;
+			font-size: 20vh;
+			font-family: 'Open Sans', sans-serif;
+			font-weight: bold;
+			border-bottom: 0.05em solid white;
+			text-align: center;
+			width: 80vw;
+			position: relative;
+			z-index: 3;
+		}
+
+		input:focus {
+			outline: 0;
+		}
+
+		canvas {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100vw;
+			height: 100vh;
+			z-index: 2;
+		}
+
+		img {
+			width: 10vw;
+			height: 10vh;
+			display: inline-block;
+		}
+
+		#tip {
+			display: none;
+			font-size: 2vh;
+			position: relative;
+			z-index: 4;
+			margin-top: 2vh;
+		}
+
+		footer {
+			text-align: center;
+			font-size: 1.5vh;
+			position: fixed;
+			width: 100vw;
+			bottom: 0;
+			z-index: 4;
+			color: grey;
+		}
+
+		a {
+			font-style: italic;
+			text-decoration: none;
+		}
+
+		a:hover {
+			text-shadow: 0px 0px 2vh white;
+			cursor: pointer;
+		}
+
+		a:visited {
+			color:white;
+		}
+
+
+	</style>
+</head>
+<body>
+	<div id="nameForm">
+		Name: <input type="text" id="nameInput">
+		<div id="tip">Press Enter to submit</div>
+		<br>
+		<img src="img/pa.png">
+	</div>
+	<canvas id="c"></canvas>
+	<footer>
+		built shamefully by <a href="http://fiala.uk/">fiala</a> in 2015.
+	</footer>
+	<script type="text/javascript">
+		var name;
+		var nameInput = $("#nameInput");
+		var nameForm = $("#nameForm");
+		var utterance;
+
+		var canvas = $("#c")[0];
+		canvas.width = $(window).width();
+		canvas.height = $(window).height();
+		var context = canvas.getContext('2d');
+
+		nameInput.keydown(function(e){
+			$("#tip").fadeIn(300);
+
+			if(e.which == 13) {
+				name = nameInput.val();
+				nameForm.fadeOut(500);
+
+				setInterval(function() {
+					context.font="30px Verdana";
+					context.fillStyle = "#fff";
+					context.fillText("?", Math.random()*$(window).width(), Math.random()*$(window).height());
+					utterance = new SpeechSynthesisUtterance((Math.random() > 0.8 ? "Seriously, w" : "W") + "hat the fuck " + (name ? name : "mate") + "?");
+					speechSynthesis.speak(utterance);
+
+				}, 3000);
+			}
+		})
+	</script>
+</body>
+</html>
