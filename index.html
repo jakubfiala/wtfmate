@@ -1,3 +1,8 @@
+<!--
+	built by fiala
+	PR'd by Hugh Rawlinson
+-->
+
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -123,25 +128,26 @@
 		canvas.width = $(window).width();
 		canvas.height = $(window).height();
 		var context = canvas.getContext('2d');
-		
+
 		var hash = window.location.hash.substring(1);
-		
-		if (hash !== ""|hash!==undefined){
+
+		if (hash != ""){
 			name = hash;
 			goForIt();
 		}
 		else {
 			nameInput.keydown(function(e){
 				name = nameInput.val();
-				window.location.hash = "#"+name;
+				$("#tip").fadeIn(300);
+
 				if(e.which == 13) {
+					window.location.hash = "#"+name;
 					goForIt();
 				}
 			});
 		}
-		
+
 		function goForIt(){
-			$("#tip").fadeIn(300);
 
 			nameForm.fadeOut(500);
 
