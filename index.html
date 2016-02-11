@@ -147,19 +147,32 @@
 			});
 		}
 
+		function utter() {
+			context.fillText("?", Math.random()*$(window).width(), Math.random()*$(window).height());
+			var text = (Math.random() > 0.8 ? "Seriously, w" : ( Math.random() > 0.75 ? "Oh come on, w" : "W")) + "hat the fuck " + (name ? name : "mate") + "?";
+			utterance = new SpeechSynthesisUtterance(text);
+			speechSynthesis.speak(utterance);
+		}
+
+
 		function goForIt(){
 
 			nameForm.fadeOut(500);
+			context.font="30px Verdana";
+			context.fillStyle = "#fff";
 
-			setInterval(function() {
-				context.font="30px Verdana";
-				context.fillStyle = "#fff";
+			setTimeout(function(){
+
 				context.fillText("?", Math.random()*$(window).width(), Math.random()*$(window).height());
-				var text = (Math.random() > 0.8 ? "Seriously, w" : ( Math.random() > 0.6 ? "Oh come on, w" : "W")) + "hat the fuck " + (name ? name : "mate") + "?";
+				var text = "What the fuck " + (name ? name : "mate") + "?";
 				utterance = new SpeechSynthesisUtterance(text);
 				speechSynthesis.speak(utterance);
 
-			}, 3000);
+				setInterval(utter, 3000);
+
+			}, 3000)
+
+
 		}
 	</script>
 </body>
