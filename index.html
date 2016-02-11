@@ -82,7 +82,7 @@
 
 		footer {
 			text-align: center;
-			font-size: 1.5vh;
+			font-size: 0.4vh;
 			position: fixed;
 			width: 100vw;
 			bottom: 0;
@@ -155,7 +155,8 @@
 				context.font="30px Verdana";
 				context.fillStyle = "#fff";
 				context.fillText("?", Math.random()*$(window).width(), Math.random()*$(window).height());
-				utterance = new SpeechSynthesisUtterance((Math.random() > 0.8 ? "Seriously, w" : "W") + "hat the fuck " + (name ? name : "mate") + "?");
+				var text = (Math.random() > 0.8 ? "Seriously, w" : ( Math.random() > 0.6 ? "Oh come on, w" : "W")) + "hat the fuck " + (name ? name : "mate") + "?";
+				utterance = new SpeechSynthesisUtterance(text);
 				speechSynthesis.speak(utterance);
 
 			}, 3000);
